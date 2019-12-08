@@ -15,12 +15,11 @@ def is_valid(charnum):
              charnum == ord('-'))
 
 def usage():
-    print "Usage:"
-    print "bitsquat.py <domain name> <extension>"
-    print ""
-    print "example:"
-    print "bitsquat.py google .com"
-    print ""
+    print ("Usage:\n"
+        "bitsquat.py <domain name> <extension>\n"
+        "\n"
+        "example:\n"
+        "bitsquat.py google .com\n")
 
 if __name__ == "__main__":
 
