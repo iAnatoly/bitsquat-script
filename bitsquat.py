@@ -42,7 +42,6 @@ if __name__ == "__main__":
                     sys.stdout.write('%s: is taken (%s)\n' % (fullname, ipaddr,))
                 except:
                     domain = whois.query(fullname)
-                    # print(domain.__dict__)
                     if domain is None:
                         sys.stdout.write('%s might be available!\n' % (fullname, ))
                     else:
