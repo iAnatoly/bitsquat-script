@@ -2,6 +2,7 @@
 # contact me: artem [at] dinaburg [dot] org
 import sys
 import socket
+import whois
 
 def bitflip(num, pos):
     shiftval = 1 << pos
@@ -36,10 +37,17 @@ if __name__ == "__main__":
             newval = bitflip(ord(val), bit)
             if is_valid(newval) and val.lower() != chr(newval).lower():
                 newname = name[:i] + chr(newval) + name[i+1:]
+                fullname = newname + suffix
                 try:
-                    ipaddr = socket.gethostbyname(newname + suffix)
-                    sys.stdout.write('%s%s: is taken (%s)\n' % (newname, suffix, ipaddr,))
+                    ipaddr = socket.gethostbyname(fullname)
+                    sys.stdout.write('%s: is taken (%s)\n' % (fullname, ipaddr,))
                 except:
-                    sys.stdout.write('%s%s might be available!\n' % (newname, suffix,))
+                    domain = whois.query(fullname)
+                    # print(domain.__dict__)
+                    if domain.registrar is None:
+                        sys.stdout.write('%s might be available!\n' % (fullname, ))
+                    else:
+                        sys.stdout.write('%s: is taken since %s\n' % (fullname, domain.creation_date,))
+    
 
 
