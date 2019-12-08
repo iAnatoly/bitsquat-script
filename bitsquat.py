@@ -43,7 +43,7 @@ if __name__ == "__main__":
                 except:
                     domain = whois.query(fullname)
                     # print(domain.__dict__)
-                    if domain.registrar is None:
+                    if domain is None:
                         sys.stdout.write('%s might be available!\n' % (fullname, ))
                     else:
                         sys.stdout.write('%s: is taken since %s\n' % (fullname, domain.creation_date,))
